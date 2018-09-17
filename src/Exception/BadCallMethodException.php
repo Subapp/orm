@@ -6,7 +6,7 @@ namespace Subapp\Orm\Exception;
  * Class BadCallMethodException
  * @package Subapp\Orm\Exception
  */
-class BadCallMethodException extends Subapp\OrmORMAbstractException
+class BadCallMethodException extends ORMAbstractException
 {
 
 }

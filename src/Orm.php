@@ -11,14 +11,14 @@ use Composer\Autoload\ClassLoader;
  * Class Subapp\Orm
  * @package Subapp\Orm
  */
-final class Subapp\OrmORM
+final class Orm
 {
     
     const VERSION_MAJOR  = 1;
     const VERSION_MINOR  = 13;
     const VERSION_PATCH  = 0;
     const VERSION_STATUS = 'stable';
-    const VERSION_NAME   = 'Subapp\Orm';
+    const VERSION_NAME   = 'subapp-orm';
     
     /**
      * @return string

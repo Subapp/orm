@@ -1,12 +1,12 @@
 <?php
 
-use Subapp\Orm\Subapp\OrmORM;
+use Subapp\Orm\Orm;
 use Subapp\Orm\Generator\Application;
 use Symfony\Component\Console\Command\Command;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
-$application = new Application('Subapp\OrmORM', Subapp\OrmORM::versionName());
+$application = new Application('Subapp\OrmORM', Orm::versionName());
 
 $iterator = new DirectoryIterator(sprintf('glob://%s/../src/Subapp\Orm/Generator/Commands/*.php', __DIR__));
 $namespace = '\\Subapp\Orm\\Generator\\Commands\\';

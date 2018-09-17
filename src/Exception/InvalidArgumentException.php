@@ -6,7 +6,7 @@ namespace Subapp\Orm\Exception;
  * Class InvalidArgumentException
  * @package Subapp\Orm\Exception
  */
-class InvalidArgumentException extends Subapp\OrmORMAbstractException
+class InvalidArgumentException extends ORMAbstractException
 {
 
 }
