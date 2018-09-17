@@ -1,0 +1,121 @@
+<?php
+
+namespace Subapp\Orm\Query\Builder;
+
+use Subapp\Orm\Collection\Collection;
+use Subapp\Orm\Connection\ConnectionInterface;
+use Subapp\Orm\Exception\BadArgumentException;
+use Subapp\Orm\Query\Builder;
+use Subapp\Orm\Query\Expr;
+use Subapp\Orm\Query\Statement\Limit;
+use Subapp\Orm\Query\Statement\Modifiers;
+use Subapp\Orm\Query\Statement\OrderBy;
+use Subapp\Orm\Query\Statement\Set;
+use Subapp\Orm\Query\Statement\Where;
+
+/**
+ * Class Update
+ * @package Subapp\Orm\Query\Builder
+ */
+class Update extends Builder
+{
+    
+    use Syntax\WhereTrait;
+    use Syntax\OrderByTrait;
+    use Syntax\SetTrait;
+    use Syntax\ModifiersTrait;
+    use Syntax\LimitTrait;
+    
+    const TEMPLATE = "UPDATE%s%s%s%s%s%s";
+    
+    /**
+     * Update constructor.
+     *
+     * @param ConnectionInterface $connection
+     */
+    public function __construct(ConnectionInterface $connection)
+    {
+        parent::__construct($connection);
+        
+        $this->statements = new Collection([
+            'modifiers' => new Modifiers($this, Modifiers::MAP_UPDATE),
+            'set'       => new Set($this),
+            'where'     => new Where($this),
+            'order'     => new OrderBy($this),
+            'limit'     => new Limit($this),
+        ]);
+    }
+    
+    /**
+     * @return string
+     */
+    public function toSQL()
+    {
+        $statementsNames = [
+            'set'   => "\nSET %s",
+            'where' => "\nWHERE %s",
+            'order' => "\nORDER BY %s",
+            'limit' => "\nLIMIT %s",
+        ];
+        
+        /** @var Expr\Table $table */
+        $table = $this->normalizeExpression($this->table);
+        
+        $statements = [];
+        $statements[] = (null === ($modifiers = $this->getModifiersStatement()->toSQL())) ? null : $modifiers;
+        $statements[] = "\n$table";
+        
+        foreach ($statementsNames as $name => $template) {
+            if (null !== ($statement = $this->statements[$name]) && null !== ($statementSQL = $statement->toSQL())) {
+                $statements[] = sprintf($template, $statementSQL);
+            } else {
+                $statements[] = null;
+            }
+        }
+        
+        return sprintf(static::TEMPLATE, ...$statements);
+    }
+    
+    /**
+     * @return Modifiers
+     */
+    public function getModifiersStatement()
+    {
+        return $this->statements->offsetGet('modifiers');
+    }
+    
+    /**
+     * @return Where
+     * @throws BadArgumentException
+     */
+    public function getWhereStatement()
+    {
+        return $this->statements->offsetGet('where');
+    }
+    
+    /**
+     * @return OrderBy
+     * @throws BadArgumentException
+     */
+    public function getOrderByStatement()
+    {
+        return $this->statements->offsetGet('order');
+    }
+    
+    /**
+     * @return Limit
+     */
+    public function getLimitStatement()
+    {
+        return $this->statements->offsetGet('limit');
+    }
+    
+    /**
+     * @return Set
+     */
+    public function getSetStatement()
+    {
+        return $this->statements->offsetGet('set');
+    }
+    
+}

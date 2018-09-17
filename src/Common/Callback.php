@@ -1,0 +1,65 @@
+<?php
+
+namespace Subapp\Orm\Common;
+
+use Subapp\Orm\Exception\BadArgumentException;
+
+/**
+ * Class Callback
+ * @package Subapp\Orm\Common
+ */
+class Callback
+{
+    
+    /**
+     * @var callable
+     */
+    protected $callback;
+    
+    /**
+     * Callback constructor.
+     *
+     * @param $callback
+     *
+     * @throws BadArgumentException
+     */
+    public function __construct($callback)
+    {
+        if (!is_callable($callback, true)) {
+            throw new BadArgumentException('Argument for ":class" constructor should be callable', [
+                'class' => static::class,
+            ]);
+        }
+        
+        $this->callback = $callback;
+    }
+    
+    /**
+     * @param array ...$arguments
+     *
+     * @return mixed
+     */
+    public function __invoke(...$arguments)
+    {
+        return $this->call(...$arguments);
+    }
+    
+    /**
+     * @param array ...$parameters
+     *
+     * @return mixed
+     */
+    public function call(...$parameters)
+    {
+        return call_user_func($this->getCallback(), ...$parameters);
+    }
+    
+    /**
+     * @return callable
+     */
+    public function getCallback()
+    {
+        return $this->callback;
+    }
+    
+}
