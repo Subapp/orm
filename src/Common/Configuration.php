@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Common;
 
-use Subapp\Orm\Parameters\ParametersCollection;
+use Colibri\Parameters\ParametersCollection;
 
 /**
  * Class Configuration
@@ -32,7 +32,7 @@ class Configuration extends ParametersCollection
      */
     public function validateConnection()
     {
-        return isset($this['connection'], $this['connection_name']);
+        return isset($this['connection'], $this['connectionName']);
     }
     
     /**
@@ -40,7 +40,7 @@ class Configuration extends ParametersCollection
      */
     public function getConnectionName()
     {
-        return $this->validateConnection() ? $this['connection_name'] : null;
+        return $this->validateConnection() ? $this['connectionName'] : null;
     }
     
     /**
@@ -56,7 +56,7 @@ class Configuration extends ParametersCollection
      */
     public function getAdditionalConfigurationDirectory()
     {
-        return isset($this['configuration_glob_pattern']) ? $this['configuration_glob_pattern'] : null;
+        return isset($this['configurationGlobPattern']) ? $this['configurationGlobPattern'] : null;
     }
     
 }

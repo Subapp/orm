@@ -14,11 +14,11 @@ use Composer\Autoload\ClassLoader;
 final class Orm
 {
     
-    const VERSION_MAJOR  = 1;
-    const VERSION_MINOR  = 13;
+    const VERSION_MAJOR  = 2;
+    const VERSION_MINOR  = 0;
     const VERSION_PATCH  = 0;
     const VERSION_STATUS = 'stable';
-    const VERSION_NAME   = 'subapp-orm';
+    const VERSION_NAME   = 'innok';
     
     /**
      * @return string
@@ -83,7 +83,7 @@ final class Orm
      */
     protected static function normalizeConfiguration(Configuration $configuration)
     {
-        return $configuration->get('Subapp\Orm_orm');
+        return $configuration->get('orm');
     }
     
     /**
@@ -116,11 +116,13 @@ final class Orm
     protected static function initializeClassLoader()
     {
         $configuration = static::getServiceContainer()->getConfiguration();
-        
-        $classLoaderFile = $configuration->path('build.autoload_file');
-        $classLoaderDirectory = $configuration->path('build.build_path');
+
+        $build = $configuration->get('build');
+
         $generatedClassesDirectory = dirname($configuration->get('identity'));
-        
+        $classLoaderFile = $build->get('autoloadFile');
+        $classLoaderDirectory = $build->get('relativeBuildPath');
+
         $classLoader = sprintf('%s/%s/%s', $generatedClassesDirectory, $classLoaderDirectory, $classLoaderFile);
         
         if (false === ($classLoader = realpath($classLoader))) {

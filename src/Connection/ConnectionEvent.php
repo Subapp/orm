@@ -11,7 +11,7 @@ use Subapp\Orm\EventDispatcher\Event;
 class ConnectionEvent extends Event
 {
     
-    const ON_QUERY = 'Subapp\Orm:query';
+    const ON_QUERY = 'ormOnQuery';
     
     /**
      * @var ConnectionInterface
