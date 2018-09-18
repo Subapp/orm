@@ -8,7 +8,7 @@ include_once __DIR__ . '/../vendor/autoload.php';
 
 $application = new Application('subapp-orm', Orm::versionName());
 
-$iterator = new DirectoryIterator(sprintf('glob://%s/../src/Subapp\Orm/Generator/Commands/*.php', __DIR__));
+$iterator = new DirectoryIterator(sprintf('glob://%s/../src/Generator/Commands/*.php', __DIR__));
 $namespace = '\\Subapp\Orm\\Generator\\Commands\\';
 
 foreach ($iterator as $file) {

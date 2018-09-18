@@ -3,6 +3,7 @@
 namespace Subapp\Orm\Common;
 
 use Colibri\Parameters\ParametersCollection;
+use Subapp\Orm\Exception\NullPointerException;
 
 /**
  * Class Configuration
@@ -10,13 +11,21 @@ use Colibri\Parameters\ParametersCollection;
  */
 class Configuration extends ParametersCollection
 {
-    
+
+    const ORM_KEY = 'orm';
+
     /**
      * @return bool
      */
     public function validateIdentity()
     {
-        return isset($this['identity']) && file_exists($this['identity']);
+        $isValid = isset($this['identity']) && file_exists($this['identity']);
+
+        if (!$isValid) {
+           $this->throwNullPointerException(['identity']);
+        }
+
+        return $isValid;
     }
     
     /**
@@ -24,7 +33,9 @@ class Configuration extends ParametersCollection
      */
     public function getConnection()
     {
-        return $this->validateConnection() ? $this['connection'] : null;
+        $this->validateConnection();
+
+        return $this['connection'];
     }
     
     /**
@@ -32,7 +43,13 @@ class Configuration extends ParametersCollection
      */
     public function validateConnection()
     {
-        return isset($this['connection'], $this['connectionName']);
+        $isValid = isset($this['connection'], $this['connectionName']);
+
+        if (!$isValid) {
+            $this->throwNullPointerException(['connectionName', 'connection']);
+        }
+
+        return $isValid;
     }
     
     /**
@@ -40,7 +57,9 @@ class Configuration extends ParametersCollection
      */
     public function getConnectionName()
     {
-        return $this->validateConnection() ? $this['connectionName'] : null;
+        $this->validateConnection();
+
+        return $this['connectionName'];
     }
     
     /**
@@ -50,13 +69,107 @@ class Configuration extends ParametersCollection
     {
         return $this['identity'];
     }
-    
+
+    /**
+     * @return bool
+     */
+    public function validateSchemaFile()
+    {
+        $isValid = isset($this['schemaFile']);
+
+        if (!$isValid) {
+            $this->throwNullPointerException(['schemaFile']);
+        }
+
+        return $isValid;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSchemaFile()
+    {
+        $this->validateSchemaFile();
+
+        return $this['schemaFile'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function validateRuntimeDirectory()
+    {
+        $isValid = isset($this['runtimeDirectory']);
+
+        if (!$isValid) {
+            $this->throwNullPointerException(['runtimeDirectory']);
+        } else {
+            $build = $this['runtimeDirectory'];
+            $isValid = isset($build['build'], $build['autoload'], $build['metadata']);
+
+            if (!$isValid) {
+                $this->throwNullPointerException(['build', 'autoload', 'metadata',]);
+            }
+        }
+
+        return $isValid;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRuntimeDirectory()
+    {
+        $this->validateRuntimeDirectory();
+
+        return $this['runtimeDirectory'];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBuildPath()
+    {
+        $this->validateRuntimeDirectory();
+
+        return $this['runtimeDirectory']['build'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetadataFile()
+    {
+        $this->validateRuntimeDirectory();
+
+        return $this['runtimeDirectory']['metadata'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAutoloadFile()
+    {
+        $this->validateRuntimeDirectory();
+
+        return $this['runtimeDirectory']['autoload'];
+    }
+
     /**
      * @return string|null
      */
     public function getAdditionalConfigurationDirectory()
     {
         return isset($this['configurationGlobPattern']) ? $this['configurationGlobPattern'] : null;
+    }
+
+    /**
+     * @param array $keys
+     * @throws NullPointerException
+     */
+    private function throwNullPointerException(array $keys)
+    {
+        throw new NullPointerException(sprintf('Required keys (%s) for configuration object does not exists', implode(', ', $keys)));
     }
     
 }

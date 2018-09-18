@@ -31,7 +31,7 @@ class Table implements ArrayableInterface
     /**
      * @var null|Relation[]
      */
-    protected $relations;
+    protected $relations = [];
     
     /**
      * Table constructor.

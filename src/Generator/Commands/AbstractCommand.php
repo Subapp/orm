@@ -41,7 +41,7 @@ abstract class AbstractCommand extends Command
      */
     public function getConfiguration()
     {
-        return $this->configuration->get('Subapp\Orm_orm');
+        return $this->configuration->get('orm');
     }
     
     /**
@@ -71,7 +71,7 @@ abstract class AbstractCommand extends Command
         
         $configuration = $helper->askQuestion($message, 'config.yml');
         $configuration = "{$this->currentWorkDirectory}/$configuration";
-        
+
         $configurationFile = new \SplFileInfo($configuration);
         
         if ($configurationFile->getExtension() === 'php') {

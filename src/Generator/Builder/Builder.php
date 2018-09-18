@@ -56,14 +56,14 @@ abstract class Builder
      */
     protected function configure()
     {
-        $directory = dirname($this->getConfiguration()->path('identity'));
-        
-        $buildDirectory = "{$directory}/{$this->getConfiguration()->path('build.build_path')}";
+        $directory = dirname($this->getConfiguration()->getIdentity());
+
+        $buildDirectory = "{$directory}/{$this->getConfiguration()->getBuildPath()}";
         
         $this->createDirectory($buildDirectory);
         
         $this->buildDirectory = realpath($buildDirectory);
-        $this->schemaFile = new \SplFileObject("{$directory}/{$this->getConfiguration()->path('schema_file')}");
+        $this->schemaFile = new \SplFileObject("{$directory}/{$this->getConfiguration()->getSchemaFile()}");
         
         if ($this->buildDirectory === false) {
             $this->writeConsole('Build directory was founded');

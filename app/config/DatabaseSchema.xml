@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<database platform="mysql" name="" package="cv_land.php_database_layer">
+
+    <table table="user" name="user">
+        <column column="id" type="integer" length="11" unsigned="true" autoIncrement="true" primaryKey="true"/>
+        <column column="name" type="string" length="128"/>
+        <column column="password" type="string" length="128"/>
+        <column column="accessBitMask" name="access" type="integer" unsigned="true"/>
+        <column column="status" type="enum" enum="active,blocked,deleted"/>
+        <column column="created" type="datetime"/>
+    </table>
+
+    <table table="systemUser" name="system_user">
+        <column column="id" type="integer" length="11" unsigned="true" autoIncrement="true" primaryKey="true"/>
+        <column column="name" type="string" length="128"/>
+        <column column="password" type="string" length="128"/>
+        <column column="accessBitMask" name="access" type="integer" unsigned="true"/>
+        <column column="created" type="datetime"/>
+    </table>
+
+    <table table="userToken" name="user_token">
+        <column column="id" type="integer" length="11" unsigned="true" autoIncrement="true" primaryKey="true"/>
+        <column column="userId" type="integer" length="11" unsigned="true"/>
+        <column column="token" type="string" length="128"/>
+        <column column="created" type="datetime"/>
+    </table>
+
+    <table table="systemUserToken" name="system_user_token">
+        <column column="id" type="integer" length="11" unsigned="true" autoIncrement="true" primaryKey="true"/>
+        <column column="userId" type="integer" length="11" unsigned="true"/>
+        <column column="token" type="string" length="128"/>
+        <column column="created" type="datetime"/>
+    </table>
+
+</database>
