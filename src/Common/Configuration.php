@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Common;
 
-use Colibri\Parameters\ParametersCollection;
+use Subapp\Parameters\ParametersCollection;
 use Subapp\Orm\Exception\NullPointerException;
 
 /**

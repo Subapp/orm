@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Collection;
 
-use Colibri\Collection\ArrayCollection;
+use Subapp\Collection\ArrayCollection;
 
 /**
  * Class Collection

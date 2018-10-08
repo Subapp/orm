@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Extension\EventSubscriber;
 
-use Colibri\Parameters\ParametersCollection;
+use Subapp\Parameters\ParametersCollection;
 use Subapp\Orm\Core\Domain\EntityInterface;
 use Subapp\Orm\Core\Event\EntityLifecycleEvent;
 use Subapp\Orm\Filters\FilterInterface;

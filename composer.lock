@@ -51,30 +51,30 @@
             "time": "2017-04-04T11:38:05+00:00"
         },
         {
-            "name": "colibrilabs/annotations",
+            "name": "subapp/annotations",
             "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/annotations.git",
+                "url": "https://github.com/subapp/annotations.git",
                 "reference": "ffc9ac6ebb6c673dbf7dbfeff1c04dacbf3067d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/annotations/zipball/ffc9ac6ebb6c673dbf7dbfeff1c04dacbf3067d9",
+                "url": "https://api.github.com/repos/subapp/annotations/zipball/ffc9ac6ebb6c673dbf7dbfeff1c04dacbf3067d9",
                 "reference": "ffc9ac6ebb6c673dbf7dbfeff1c04dacbf3067d9",
                 "shasum": ""
             },
             "require": {
-                "colibrilabs/cache": "~1.0",
-                "colibrilabs/collection": "~0.2",
-                "colibrilabs/lexer": "~1.0",
-                "colibrilabs/loader": "~1.2",
+                "subapp/cache": "~1.0",
+                "subapp/collection": "~0.2",
+                "subapp/lexer": "~1.0",
+                "subapp/loader": "~1.2",
                 "php": ">=5.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Annotations\\": "src"
+                    "Subapp\\Annotations\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -94,16 +94,16 @@
             "time": "2017-06-22T09:48:34+00:00"
         },
         {
-            "name": "colibrilabs/cache",
+            "name": "subapp/cache",
             "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/cache.git",
+                "url": "https://github.com/subapp/cache.git",
                 "reference": "ff89de5252a55b606ff5be2bebf2b41b2844131d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/cache/zipball/ff89de5252a55b606ff5be2bebf2b41b2844131d",
+                "url": "https://api.github.com/repos/subapp/cache/zipball/ff89de5252a55b606ff5be2bebf2b41b2844131d",
                 "reference": "ff89de5252a55b606ff5be2bebf2b41b2844131d",
                 "shasum": ""
             },
@@ -116,7 +116,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Cache\\": "src/"
+                    "Subapp\\Cache\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -131,7 +131,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Colibri Cache Component",
+            "description": "Subapp Cache Component",
             "keywords": [
                 "cache",
                 "colibri cache",
@@ -141,16 +141,16 @@
             "time": "2017-05-23T09:11:56+00:00"
         },
         {
-            "name": "colibrilabs/collection",
+            "name": "subapp/collection",
             "version": "0.2.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/collection.git",
+                "url": "https://github.com/subapp/collection.git",
                 "reference": "85d61b52f9070da694d264b03a565a17b4347e0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/collection/zipball/85d61b52f9070da694d264b03a565a17b4347e0b",
+                "url": "https://api.github.com/repos/subapp/collection/zipball/85d61b52f9070da694d264b03a565a17b4347e0b",
                 "reference": "85d61b52f9070da694d264b03a565a17b4347e0b",
                 "shasum": ""
             },
@@ -160,7 +160,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Collection\\": "src/"
+                    "Subapp\\Collection\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -181,16 +181,16 @@
             "time": "2017-06-21T15:36:43+00:00"
         },
         {
-            "name": "colibrilabs/html",
+            "name": "subapp/html",
             "version": "v0.1.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/html.git",
+                "url": "https://github.com/subapp/html.git",
                 "reference": "fe2e3d0c4591f552e68c2a0f85efa334d54fcda0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/html/zipball/fe2e3d0c4591f552e68c2a0f85efa334d54fcda0",
+                "url": "https://api.github.com/repos/subapp/html/zipball/fe2e3d0c4591f552e68c2a0f85efa334d54fcda0",
                 "reference": "fe2e3d0c4591f552e68c2a0f85efa334d54fcda0",
                 "shasum": ""
             },
@@ -200,7 +200,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Html\\": "src/"
+                    "Subapp\\Html\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -221,16 +221,16 @@
             "time": "2017-05-23T09:11:06+00:00"
         },
         {
-            "name": "colibrilabs/lexer",
+            "name": "subapp/lexer",
             "version": "1.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/lexer.git",
+                "url": "https://github.com/subapp/lexer.git",
                 "reference": "4b451ab347317b1c866290f9ecf06948e4276a8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/lexer/zipball/4b451ab347317b1c866290f9ecf06948e4276a8c",
+                "url": "https://api.github.com/repos/subapp/lexer/zipball/4b451ab347317b1c866290f9ecf06948e4276a8c",
                 "reference": "4b451ab347317b1c866290f9ecf06948e4276a8c",
                 "shasum": ""
             },
@@ -240,7 +240,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Lexer\\": "src"
+                    "Subapp\\Lexer\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -260,16 +260,16 @@
             "time": "2017-05-23T09:23:15+00:00"
         },
         {
-            "name": "colibrilabs/loader",
+            "name": "subapp/loader",
             "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/loader.git",
+                "url": "https://github.com/subapp/loader.git",
                 "reference": "ca98e392df324de0bba74bee6b749e70bf564160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/loader/zipball/ca98e392df324de0bba74bee6b749e70bf564160",
+                "url": "https://api.github.com/repos/subapp/loader/zipball/ca98e392df324de0bba74bee6b749e70bf564160",
                 "reference": "ca98e392df324de0bba74bee6b749e70bf564160",
                 "shasum": ""
             },
@@ -279,7 +279,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Loader\\": "src/"
+                    "Subapp\\Loader\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -302,16 +302,16 @@
             "time": "2017-05-23T08:54:19+00:00"
         },
         {
-            "name": "colibrilabs/parameters",
+            "name": "subapp/parameters",
             "version": "v0.1.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/colibrilabs/parameters.git",
+                "url": "https://github.com/subapp/parameters.git",
                 "reference": "408c31f0806696384c8af2e5a850365f663af59e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colibrilabs/parameters/zipball/408c31f0806696384c8af2e5a850365f663af59e",
+                "url": "https://api.github.com/repos/subapp/parameters/zipball/408c31f0806696384c8af2e5a850365f663af59e",
                 "reference": "408c31f0806696384c8af2e5a850365f663af59e",
                 "shasum": ""
             },
@@ -322,7 +322,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Parameters\\": "src/"
+                    "Subapp\\Parameters\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

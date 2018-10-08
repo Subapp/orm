@@ -68,7 +68,7 @@ return [
             \StubModel::class => [
                 'name' => [
                     'filters' => [
-                        \Colibri\Filters\ClearHtmlFilter::class => [[]], // clear all
+                        \Subapp\Filters\ClearHtmlFilter::class => [[]], // clear all
                     ],
                 ],
             ],
