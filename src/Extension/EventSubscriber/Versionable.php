@@ -6,7 +6,7 @@ use Subapp\Orm\Core\Domain\EntityInterface;
 use Subapp\Orm\Core\Event\EntityLifecycleEvent;
 use Subapp\Orm\Core\ORMEvents;
 use Subapp\Orm\Extension\AbstractExtension;
-use Subapp\Orm\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 
 /**
  * Class Versionable

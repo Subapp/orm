@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Extension\EventSubscriber;
 
-use Subapp\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 use Subapp\Orm\Core\Domain\EntityInterface;
 use Subapp\Orm\Core\Event\EntityLifecycleEvent;
 use Subapp\Orm\Filters\FilterInterface;
@@ -50,6 +50,12 @@ class DataFilter extends AbstractDataFilter
         /** @var FilterInterface $filter */
         foreach ($filterClasses as $filterClass => $filterClassArguments) {
             $filter = new $filterClass(...$filterClassArguments);
+
+            if (!($filter instanceof FilterInterface)) {
+                throw new \RuntimeException(sprintf('Filter %s must implement %s interface',
+                    $filterClass, FilterInterface::class));
+            }
+
             $propertyData = $filter->apply($propertyData);
         }
         

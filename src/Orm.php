@@ -50,7 +50,6 @@ final class Orm
      * @param Configuration $configuration
      *
      * @throws InvalidArgumentException
-     * @throws NotFoundException
      * @throws \InvalidArgumentException
      */
     public static function initialize(Configuration $configuration)

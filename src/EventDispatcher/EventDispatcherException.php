@@ -2,13 +2,13 @@
 
 namespace Subapp\Orm\EventDispatcher;
 
-use Subapp\Orm\Exception\Subapp\OrmORMAbstractException;
+use Subapp\Orm\Exception\ORMAbstractException;
 
 /**
  * Class EventDispatcherException
  * @package Subapp\Orm\EventDispatcher
  */
-class EventDispatcherException extends Subapp\OrmORMAbstractException
+class EventDispatcherException extends ORMAbstractException
 {
 
 }

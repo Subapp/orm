@@ -40,7 +40,7 @@ class Inflector
      */
     public static function classify($string = null)
     {
-        return implode('', array_map(function ($word) {
+        return implode(array_map(function ($word) {
             return ucfirst(strtolower($word));
         }, explode(static::SEPARATOR_UNDERSCORE, static::clear(static::underscore($string)))));
     }

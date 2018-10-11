@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Extension;
 
-use Subapp\Orm\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 
 /**
  * Interface ExtensionInterface

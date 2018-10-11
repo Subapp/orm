@@ -3,7 +3,7 @@
 namespace Subapp\Orm\Exception;
 
 /**
- * Class Subapp\OrmORMAbstractException
+ * Class ORMAbstractException
  * @package Subapp\Orm\Exception
  */
 abstract class ORMAbstractException extends \Exception

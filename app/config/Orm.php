@@ -9,9 +9,9 @@ return [
     
     'orm' => [
         'identity' => __FILE__,
-        'dev_configuration' => __DIR__ . '/OrmDevelopment.php',
-        'configuration_glob_pattern' => 'glob://%s/OrmExtension/*',
-        'connection_name' => 'production',
+        'devConfiguration' => __DIR__ . '/OrmDevelopment.php',
+        'configurationGlobPattern' => 'glob://%s/OrmExtension/*',
+        'connectionName' => 'production',
         'connection' => [
             'production' => [
                 'dsn' => 'mysql:host=localhost;dbname=testdb;port=3306',
@@ -68,7 +68,7 @@ return [
             \StubModel::class => [
                 'name' => [
                     'filters' => [
-                        \Subapp\Filters\ClearHtmlFilter::class => [[]], // clear all
+                        \Subapp\Orm\Filters\ClearHtmlFilter::class => [[]], // clear all
                     ],
                 ],
             ],

@@ -139,7 +139,7 @@ final class ServiceLocator implements ServiceLocatorInterface, LoggerAwareInterf
     public function getLogger()
     {
         if (!$this->instances->has('logger')) {
-            $this->setLogger(new Log('Subapp\Orm.ORM'));
+            $this->setLogger(new Log('logger'));
         }
         
         return null;

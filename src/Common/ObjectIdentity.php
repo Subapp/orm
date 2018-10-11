@@ -37,9 +37,8 @@ final class ObjectIdentity
      * @param object $object
      *
      * @return static
-     * @throws BadArgumentException
      */
-    public static function createFromObject(object $object)
+    public static function createFromObject($object)
     {
         if ($object instanceof ObjectIdentity) {
             return new static($object->getIdentifier());

@@ -2,7 +2,7 @@
 
 namespace Subapp\Orm\Common;
 
-use Subapp\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 use Subapp\Orm\Exception\NullPointerException;
 
 /**

@@ -6,7 +6,7 @@ use Subapp\Orm\Common\Callback;
 use Subapp\Orm\Core\Event\EntityLifecycleEvent;
 use Subapp\Orm\EventDispatcher\EventSubscriber;
 use Subapp\Orm\Exception\NotFoundException;
-use Subapp\Orm\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 
 /**
  * Class AbstractExtension

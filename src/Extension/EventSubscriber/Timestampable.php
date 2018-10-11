@@ -9,7 +9,7 @@ use Subapp\Orm\Core\ORMEvents;
 use Subapp\Orm\Core\Repository;
 use Subapp\Orm\Extension\AbstractExtension;
 use Subapp\Orm\Extension\ExtensionException;
-use Subapp\Orm\Parameters\ParametersCollection;
+use Subapp\Collection\Parameters\ParametersCollection;
 
 /**
  * Class Timestampable
