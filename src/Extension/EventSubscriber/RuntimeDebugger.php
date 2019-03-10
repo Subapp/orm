@@ -143,7 +143,7 @@ class RuntimeDebugger extends AbstractExtension implements ProxyInterface
                     break;
                 case ($event instanceof FinderExecutionEvent):
                     $entityName = $event->getRepository()->getEntityName();
-                    $query = $event->getSelectQuery();
+                    $query = $event->getQuery();
                     $message = sprintf("SQL: (%s)", str_replace("\n", "\x20", $query->toSQL()));
                     break;
             }

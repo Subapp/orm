@@ -17,7 +17,8 @@ use Subapp\Orm\Schema\Table;
 
 echo "<?php\n\n";
 
-echo $this->render('templates/phpdocInfo.php') . PHP_EOL;
+echo $this->render('templates/phpdocInfo.php') . PHP_EOL . PHP_EOL;
+echo $this->render('templates/phpdocImportant.php') . PHP_EOL;
 
 $class = sprintf(EntityBuilder::BASE_ENTITY_TEMPLATE, $table->getClassifyName());
 

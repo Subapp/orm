@@ -15,12 +15,8 @@ use Subapp\Orm\Core\Storage\RemoverInterface;
 use Subapp\Orm\EventDispatcher\DispatcherInterface;
 use Subapp\Orm\EventDispatcher\EventInterface;
 use Subapp\Orm\Exception\NotFoundException;
-use Subapp\Orm\Query\Builder\Delete;
-use Subapp\Orm\Query\Builder\Insert;
-use Subapp\Orm\Query\Builder\Select;
-use Subapp\Orm\Query\Builder\Select as SelectQueryBuilder;
-use Subapp\Orm\Query\Builder\Update;
 use Subapp\Orm\ServiceContainer\ServiceLocatorInterface;
+use Subapp\Sql\Query\Query;
 
 /**
  * Interface RepositoryInterface
@@ -112,7 +108,7 @@ interface RepositoryInterface
     public function getEntityMetadata();
     
     /**
-     * @return SelectQueryBuilder
+     * @return Query
      */
     public function getQuery();
     
@@ -178,18 +174,12 @@ interface RepositoryInterface
     public function executeCriteria($criteria);
     
     /**
-     * @param integer $offset
-     *
-     * @return RepositoryInterface
-     */
-    public function setOffset($offset);
-    
-    /**
      * @param integer $length
      *
+     * @param int     $offset
      * @return RepositoryInterface
      */
-    public function setLimit($length);
+    public function setLimit($length, $offset = 0);
     
     /**
      * @return ServiceLocatorInterface
@@ -197,17 +187,17 @@ interface RepositoryInterface
     public function getServiceLocator();
     
     /**
-     * @return Select
+     * @return Query
      */
     public function createFinder();
     
     /**
-     * @return Insert
+     * @return Query
      */
     public function createPersister();
     
     /**
-     * @return Delete
+     * @return Query
      */
     public function createRemover();
     
@@ -227,7 +217,7 @@ interface RepositoryInterface
     public function getFinder();
     
     /**
-     * @return Update
+     * @return Query
      * @deprecated
      */
     public function createUpdateQuery();

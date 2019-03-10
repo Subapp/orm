@@ -5,8 +5,7 @@ namespace Subapp\Orm\Pagination;
 use Subapp\Orm\Connection\StmtInterface;
 use Subapp\Orm\Core\Domain\RepositoryInterface;
 use Subapp\Orm\Core\ResultSet\ResultSet;
-use Subapp\Orm\Query\Expr\Column;
-use Subapp\Orm\Query\Expr\Func\Count;
+use Subapp\Sql\Query\Query;
 
 /**
  * Class Paginator
@@ -54,10 +53,11 @@ class Paginator implements \IteratorAggregate
         
         $this->determineTotalPages();
         
-        $currentPage = max(0, min($this->getTotalPages(), $this->getCurrentPage()) - 1);
+        $current    = max(0, min($this->getTotalPages(), $this->getCurrentPage()) - 1);
+        $length     = $this->getCountPerPage();
+        $offset     = $current * $this->getCountPerPage();
         
-        $repository->setLimit($this->getCountPerPage());
-        $repository->setOffset($currentPage * $this->getCountPerPage());
+        $repository->setLimit($length, $offset);
         
         return $this;
     }
@@ -83,12 +83,11 @@ class Paginator implements \IteratorAggregate
         $identifier = $metadata->getIdentifier();
         $identifier = $metadata->getRawSQLName($identifier);
         
-        $queryBuild->clearSelectColumns();
-        $queryBuild->addSelectColumn(new Count(new Column($identifier), true), 'totalRows');
-        $queryBuild->clearGroupByColumns();
+        $queryBuild->reset(Query::GROUP_BY | Query::SELECT);
+        $queryBuild->select(sprintf('count(%s) rows', $identifier));
         
         /** @var StmtInterface|\PDOStatement $statement */
-        $statement = $connection->query($queryBuild->toSQL());
+        $statement = $connection->query($queryBuild->getSql());
         
         $totalRows = $statement->fetchColumn(0);
         $this->totalPages = (integer) ceil($totalRows / $this->getCountPerPage());

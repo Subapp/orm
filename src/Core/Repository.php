@@ -29,10 +29,10 @@ use Subapp\Orm\Exception\BadArgumentException;
 use Subapp\Orm\Exception\BadCallMethodException;
 use Subapp\Orm\Exception\NotFoundException;
 use Subapp\Orm\Exception\NotSupportedException;
-use Subapp\Orm\Query\Builder as QueryBuilder;
-use Subapp\Orm\Query\Criteria;
 use Subapp\Orm\ServiceContainer\ServiceLocator;
 use Subapp\Orm\ServiceContainer\ServiceLocatorInterface;
+use Subapp\Sql\Query\Query;
+use Subapp\Sql\Sql;
 
 /**
  * Class EntityRepository
@@ -72,7 +72,7 @@ abstract class Repository implements RepositoryInterface
     protected $connection;
     
     /**
-     * @var QueryBuilder\Select
+     * @var Query
      */
     protected $query;
     
@@ -107,7 +107,7 @@ abstract class Repository implements RepositoryInterface
         $this->setHydrator(new EntityHydrator($this));
         $this->setQueryFactory(new BasicRepositoryQueryFactory());
         
-        $this->query = $this->createFinder();
+        $this->resetSelectQuery();
     }
     
     /**
@@ -135,7 +135,7 @@ abstract class Repository implements RepositoryInterface
     }
     
     /**
-     * @return QueryBuilder\Select
+     * @return Query
      */
     public function createFinder()
     {
@@ -242,14 +242,9 @@ abstract class Repository implements RepositoryInterface
         $selectQuery = $this->getQuery();
         
         $this->dispatchEvent(ORMEvents::beforeFindExecute, new FinderExecutionEvent($this, $selectQuery));
-        
-        $statement = $this->getConnection()->prepare($this->getQuery(), []);
-        
-        // if query builder was initialized as parameterized
-        // and it have what to bind to PDOStatement
-        if ($selectQuery->isParameterized() && count($selectQuery->getPlaceholders()) > 0) {
-            $statement->bindParams($this->getQuery()->getPlaceholders());
-        }
+
+        var_dump($this->getQuery()->getSql());
+        $statement = $this->getConnection()->prepare($this->getQuery()->getSql(), []);
         
         // executes a prepared statement
         $statement->execute();
@@ -257,13 +252,13 @@ abstract class Repository implements RepositoryInterface
         $this->dispatchEvent(ORMEvents::afterFindExecute, new FinderExecutionEvent($this, $selectQuery));
         
         // reset qb to previous state
-        $this->cleanupQuery();
+        $this->resetSelectQuery();
         
         return new StatementIterator($statement);
     }
     
     /**
-     * @return QueryBuilder\Select
+     * @return Query
      */
     public function getQuery()
     {
@@ -271,11 +266,11 @@ abstract class Repository implements RepositoryInterface
     }
     
     /**
-     * @param QueryBuilder\Select $filterQuery
+     * @param Query $filterQuery
      *
      * @return $this
      */
-    public function setQuery(QueryBuilder\Select $filterQuery)
+    public function setQuery(Query $filterQuery)
     {
         $this->query = $filterQuery;
         
@@ -314,13 +309,15 @@ abstract class Repository implements RepositoryInterface
     /**
      * @return $this
      */
-    public function cleanupQuery()
+    public function resetSelectQuery()
     {
         $metadata = $this->getEntityMetadata();
-        $query = $this->getQuery();
+        $query = $this->getQueryFactory()->createSelectQuery();
+
+        $query->columns($metadata->getSelectColumns());
+        $query->table($metadata->getTableName());
         
-        $query->cleanup();
-        $query->addSelectColumns($metadata->getSelectColumns());
+        $this->setQuery($query);
         
         return $this;
     }
@@ -338,20 +335,26 @@ abstract class Repository implements RepositoryInterface
         
         if (null !== $criteria) {
             switch (true) {
-                case is_scalar($criteria):
-                    $identifier = $metadata->getRawSQLName($metadata->getIdentifier());
-                    $query->addConditions($identifier, $criteria);
+                case (is_scalar($criteria)):
+                case (is_array($criteria) and count($criteria) > 0):
+                    
+                    if (is_array($criteria)) {
+                        list($identifier, $criteria) = $criteria;
+                    } else {
+                        $identifier = $metadata->getRawSQLName($metadata->getIdentifier());
+                    }
+                    
+                    $builder = $query->builder();
+                    $where = $builder->eq($identifier, $criteria);
+                    $query->where($where);
+                    
                     break;
                 
-                case $criteria instanceof QueryBuilder\Select:
-                    $criteria->setFromTable($metadata->getTableName());
+                case $criteria instanceof Query:
+                    $criteria->table($metadata->getTableName());
                     $this->setQuery($criteria);
                     break;
-                
-                case (is_array($criteria) and count($criteria) > 0):
-                    $query->addConditions(...$criteria);
-                    break;
-                
+
                 default:
                     throw new NotSupportedException('It is impossible to determine the correct assignment criteria');
                     break;
@@ -388,7 +391,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function groupBy($criteria)
     {
-        $this->getQuery()->groupBy(...$criteria);
+        $this->getQuery()->group(...$criteria);
         
         return $this;
     }
@@ -400,7 +403,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function orderBy($criteria)
     {
-        $this->getQuery()->orderBy(...$criteria);
+        $this->getQuery()->order(...$criteria);
         
         return $this;
     }
@@ -437,7 +440,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function findFirst($criteria = null)
     {
-        $this->getQuery()->setLimit(1);
+        $this->getQuery()->limit(1);
         
         $resultSet = $this->findBy($criteria);
         $resultSet->rewind();
@@ -465,16 +468,20 @@ abstract class Repository implements RepositoryInterface
             $entityData = $this->getEntityDataArray($entity);
             
             $persister = $this->getPersisterForEntity($entity);
-            $persister->setDataBatch($entityData);
+            $persister->sets($entityData);
+            
+            $builder = $persister->builder();
             
             $propertyIdentifier = $metadata->getName($metadata->getIdentifier(), Metadata::CAMILIZED);
             
             if (!$isEntityNew && $reflection->hasProperty($propertyIdentifier)) {
-                $persister->addConditions($metadata->getIdentifier(), $entity->getByProperty($propertyIdentifier));
+                $where = $builder->eq($metadata->getIdentifier(), $entity->getByProperty($propertyIdentifier));
+                $persister->where($where);
             }
             
             $connection->start();
-            $connection->execute($persister->toSQL());
+            var_dump($persister->getSql());
+            $connection->execute($persister->getSql());
             
             if ($reflection->hasProperty($propertyIdentifier) && $isEntityNew) {
                 $reflection->getProperty($propertyIdentifier)->setValue($entity, $connection->lastInsertId());
@@ -562,18 +569,13 @@ abstract class Repository implements RepositoryInterface
         return $this;
     }
     
-    /**
-     * @param EntityInterface $entity
-     *
-     * @return QueryBuilder\Insert|QueryBuilder\Update
-     */
     public function getPersisterForEntity(EntityInterface $entity)
     {
         return $this->isNewEntity($entity) ? $this->createPersister() : $this->createUpdateQuery();
     }
     
     /**
-     * @return QueryBuilder\Insert
+     * @inheritdoc
      */
     public function createPersister()
     {
@@ -581,8 +583,7 @@ abstract class Repository implements RepositoryInterface
     }
     
     /**
-     * @return QueryBuilder\Update
-     * @deprecated
+     * @inheritdoc
      */
     public function createUpdateQuery()
     {
@@ -611,13 +612,17 @@ abstract class Repository implements RepositoryInterface
             $connection = $this->getConnection();
             $propertyIdentifier = $metadata->getName($identifier, Metadata::CAMILIZED);
             
+            $builder = $remover->builder();
+            
+            $where = $builder->eq($identifier, $entity->getByProperty($propertyIdentifier));
+            
             // refinement of the request
-            $remover->addConditions($identifier, $entity->getByProperty($propertyIdentifier));
-            $remover->setLimit(1)->setOffset(0);
+            $remover->where($where)->limit(1);
             
             // open transaction and try to execute sql
             $connection->transaction(function () use ($connection, $remover) {
-                $connection->execute($remover->toSQL());
+                var_dump($remover->getSql());
+                $connection->execute($remover->getSql());
             });
             
             // reset identifier for removed entity
@@ -634,7 +639,7 @@ abstract class Repository implements RepositoryInterface
     }
     
     /**
-     * @return QueryBuilder\Delete
+     * @return Query
      */
     public function createRemover()
     {
@@ -659,6 +664,7 @@ abstract class Repository implements RepositoryInterface
     
     /**
      * @inheritDoc
+     * @throws NotSupportedException
      */
     public function getRemover()
     {
@@ -667,6 +673,7 @@ abstract class Repository implements RepositoryInterface
     
     /**
      * @inheritDoc
+     * @throws NotSupportedException
      */
     public function getPersister()
     {
@@ -675,6 +682,7 @@ abstract class Repository implements RepositoryInterface
     
     /**
      * @inheritDoc
+     * @throws NotSupportedException
      */
     public function getFinder()
     {
@@ -682,37 +690,14 @@ abstract class Repository implements RepositoryInterface
     }
     
     /**
-     * @param int $offset
-     *
-     * @return $this
-     */
-    public function setOffset($offset)
-    {
-        $this->getQuery()->offset($offset);
-        
-        return $this;
-    }
-    
-    /**
      * @param int $length
      *
+     * @param int $offset
      * @return $this
      */
-    public function setLimit($length)
+    public function setLimit($length, $offset = 0)
     {
-        $this->getQuery()->limit($length);
-        
-        return $this;
-    }
-    
-    /**
-     * @param Criteria $criteria
-     *
-     * @return $this
-     */
-    public function setCriteria(Criteria $criteria)
-    {
-        $this->setQuery($criteria->getSelectBuilderObject());
+        $this->getQuery()->limit($length, $offset);
         
         return $this;
     }

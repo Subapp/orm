@@ -115,14 +115,8 @@ final class Orm
     protected static function initializeClassLoader()
     {
         $configuration = static::getServiceContainer()->getConfiguration();
-
-        $build = $configuration->get('build');
-
-        $generatedClassesDirectory = dirname($configuration->get('identity'));
-        $classLoaderFile = $build->get('autoloadFile');
-        $classLoaderDirectory = $build->get('relativeBuildPath');
-
-        $classLoader = sprintf('%s/%s/%s', $generatedClassesDirectory, $classLoaderDirectory, $classLoaderFile);
+        $rootDirectory = dirname($configuration->getIdentity());
+        $classLoader = sprintf('%s/%s/%s', $rootDirectory, $configuration->getBuildPath(), $configuration->getAutoloadFile());
         
         if (false === ($classLoader = realpath($classLoader))) {
             throw new NotFoundException('Class loader file was not found. Maybe your application not installed yet');

@@ -1,25 +1,21 @@
 <?php
 
 return array (
-  'entityClass' => 'CvLand\\PhpDatabaseLayer\\SystemUser',
-  'entityRepositoryClass' => 'CvLand\\PhpDatabaseLayer\\SystemUserRepository',
-  'tableName' => 'systemUser',
+  'entityClass' => 'IdPorn\\Dbl\\Star',
+  'entityRepositoryClass' => 'IdPorn\\Dbl\\StarRepository',
+  'tableName' => 'stars',
   'identifier' => 'id',
   'rawSQLNames' => 
   array (
-    'id' => 'systemUser.id',
-    'name' => 'systemUser.name',
-    'password' => 'systemUser.password',
-    'access' => 'systemUser.accessBitMask',
-    'created' => 'systemUser.created',
+    'id' => 'stars.id',
+    'name' => 'stars.name',
+    'created_at' => 'stars.created_at',
   ),
   'names' => 
   array (
     'id' => 'id',
     'name' => 'name',
-    'password' => 'password',
-    'access' => 'accessBitMask',
-    'created' => 'created',
+    'created_at' => 'created_at',
   ),
   'relations' => 
   array (
@@ -36,7 +32,6 @@ return array (
   'unsigned' => 
   array (
     'id' => 'id',
-    'accessBitMask' => 'access',
   ),
   'primary' => 
   array (
@@ -67,7 +62,7 @@ return array (
        'name' => 'name',
        'type' => 
       Subapp\Orm\Schema\Types\StringType::__set_state(array(
-         'length' => 128,
+         'length' => 64,
          'precision' => 0,
          'extra' => NULL,
       )),
@@ -78,44 +73,10 @@ return array (
        'primaryKey' => false,
        'identity' => false,
     )),
-    'password' => 
+    'created_at' => 
     Subapp\Orm\Schema\Field::__set_state(array(
-       'column' => 'password',
-       'name' => 'password',
-       'type' => 
-      Subapp\Orm\Schema\Types\StringType::__set_state(array(
-         'length' => 128,
-         'precision' => 0,
-         'extra' => NULL,
-      )),
-       'default' => NULL,
-       'unsigned' => false,
-       'nullable' => false,
-       'autoIncrement' => false,
-       'primaryKey' => false,
-       'identity' => false,
-    )),
-    'access' => 
-    Subapp\Orm\Schema\Field::__set_state(array(
-       'column' => 'accessBitMask',
-       'name' => 'access',
-       'type' => 
-      Subapp\Orm\Schema\Types\IntegerType::__set_state(array(
-         'length' => 0,
-         'precision' => 0,
-         'extra' => NULL,
-      )),
-       'default' => NULL,
-       'unsigned' => true,
-       'nullable' => false,
-       'autoIncrement' => false,
-       'primaryKey' => false,
-       'identity' => false,
-    )),
-    'created' => 
-    Subapp\Orm\Schema\Field::__set_state(array(
-       'column' => 'created',
-       'name' => 'created',
+       'column' => 'created_at',
+       'name' => 'created_at',
        'type' => 
       Subapp\Orm\Schema\Types\DatetimeType::__set_state(array(
          'length' => 0,

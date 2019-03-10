@@ -16,7 +16,8 @@ use Subapp\Orm\Schema\Table;
 
 echo "<?php\n";
 
-echo $this->render('templates/phpdocInfo.php') . PHP_EOL;
+echo $this->render('templates/phpdocInfo.php') . PHP_EOL . PHP_EOL;
+echo $this->render('templates/phpdocImportant.php') . PHP_EOL;
 
 $class = sprintf(EntityBuilder::BASE_ENTITY_REPOSITORY_TEMPLATE, $table->getClassifyName());
 $commonClass = sprintf(EntityBuilder::ENTITY_REPOSITORY_TEMPLATE, $table->getClassifyName());
@@ -33,8 +34,8 @@ $resultSetReflection = new ReflectionClass(ResultSetIterator::class);
 namespace <?php echo $namespace; ?>\Base;
 
 use Subapp\Orm\Core\Repository;
-use Subapp\Orm\Query\Statement\Comparison\Cmp;
-use Subapp\Orm\Query\Statement\OrderBy;
+use Subapp\Sql\Ast\Condition;
+use Subapp\Sql\Ast\Stmt;
 use <?php echo $namespaceCommonClass; ?>;
 use <?php echo $namespaceEntityClass; ?>;
 use <?php echo $resultSetReflection->getName(); ?>;
@@ -45,8 +46,8 @@ use <?php echo $resultSetReflection->getName(); ?>;
 <?php foreach ($table->getFields() as $field): ?>
  * @method <?php echo $entityClass; ?> findOneBy<?php echo $field->getClassifyName(); ?>($<?php echo $field->getColumn(); ?>);
  * @method <?php echo $resultSetReflection->getShortName(); ?> findBy<?php echo $field->getClassifyName(); ?>($<?php echo $field->getColumn(); ?>);
- * @method <?php echo $commonClass; ?> filterBy<?php echo $field->getClassifyName(); ?>($<?php echo $field->getColumn(); ?>, $cmp = Cmp::EQ);
- * @method <?php echo $commonClass; ?> orderBy<?php echo $field->getClassifyName(); ?>($vector = OrderBy::ASC);
+ * @method <?php echo $commonClass; ?> filterBy<?php echo $field->getClassifyName(); ?>($<?php echo $field->getColumn(); ?>, $cmp = Condition\Operator::EQ);
+ * @method <?php echo $commonClass; ?> orderBy<?php echo $field->getClassifyName(); ?>($vector = Stmt\OrderBy::ASC);
  * @method <?php echo $commonClass; ?> groupBy<?php echo $field->getClassifyName(); ?>();
 <?php endforeach; ?>
 */

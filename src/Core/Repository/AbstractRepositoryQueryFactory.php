@@ -2,11 +2,9 @@
 
 namespace Subapp\Orm\Core\Repository;
 
-use Subapp\Orm\Connection\ConnectionInterface;
 use Subapp\Orm\Core\Domain\MetadataInterface;
 use Subapp\Orm\Core\Domain\RepositoryInterface;
-use Subapp\Orm\Exception\NullPointerException;
-use Subapp\Orm\Query\Builder as QueryBuilder;
+use Subapp\Sql;
 
 /**
  * Abstract Class RepositoryQueryFactory
@@ -21,23 +19,7 @@ abstract class AbstractRepositoryQueryFactory
     protected $repository;
     
     /**
-     * @return QueryBuilder\Select
-     * @throws NullPointerException
-     */
-    public function createSelectQuery()
-    {
-        $metadata = $this->getEntityMetadata();
-        $query = new QueryBuilder\Select($this->getConnection());
-        
-        $query->setFromTable($metadata->getTableName());
-        $query->addSelectColumns($metadata->getSelectColumns());
-        
-        return $query;
-    }
-    
-    /**
      * @return MetadataInterface
-     * @throws NullPointerException
      */
     public function getEntityMetadata()
     {
@@ -46,14 +28,9 @@ abstract class AbstractRepositoryQueryFactory
     
     /**
      * @return RepositoryInterface
-     * @throws NullPointerException
      */
     public function getRepository()
     {
-        if (!($this->repository instanceof RepositoryInterface)) {
-            throw new NullPointerException(sprintf('Repository was not initialized for %s', static::class));
-        }
-        
         return $this->repository;
     }
     
@@ -70,54 +47,43 @@ abstract class AbstractRepositoryQueryFactory
     }
     
     /**
-     * @return ConnectionInterface
-     * @throws NullPointerException
+     * @return Sql\Query\Query
      */
-    public function getConnection()
+    public function createQuery()
     {
-        return $this->getRepository()->getConnection();
+        return Sql\Sql::getInstance()->newQuery();
     }
     
     /**
-     * @return QueryBuilder\Insert
-     * @throws NullPointerException
+     * @return Sql\Query\Query
+     */
+    public function createSelectQuery()
+    {
+        return $this->createQuery()->select($this->getEntityMetadata()->getTableName());
+    }
+    
+    /**
+     * @return Sql\Query\Query
      */
     public function createInsertQuery()
     {
-        $metadata = $this->getEntityMetadata();
-        $query = new QueryBuilder\Insert($this->getConnection());
-        
-        $query->setTableInto($metadata->getTableName());
-        
-        return $query;
+        return $this->createQuery()->insert($this->getEntityMetadata()->getTableName());
     }
     
     /**
-     * @return QueryBuilder\Delete
-     * @throws NullPointerException
+     * @return Sql\Query\Query
      */
     public function createDeleteQuery()
     {
-        $metadata = $this->getEntityMetadata();
-        $query = new QueryBuilder\Delete($this->getConnection());
-        
-        $query->setFromTable($metadata->getTableName());
-        
-        return $query;
+        return $this->createQuery()->delete($this->getEntityMetadata()->getTableName());
     }
     
     /**
-     * @return QueryBuilder\Update
-     * @throws NullPointerException
+     * @return Sql\Query\Query
      */
     public function createUpdateQuery()
     {
-        $metadata = $this->getEntityMetadata();
-        $query = new QueryBuilder\Update($this->getConnection());
-        
-        $query->table($metadata->getTableName());
-        
-        return $query;
+        return $this->createQuery()->update($this->getEntityMetadata()->getTableName());
     }
     
 }

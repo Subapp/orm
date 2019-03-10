@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbaf509ff41ef7bb587dd482711eb694",
+    "content-hash": "bccddceadb75a5e118e6293c5864fdf8",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -52,16 +52,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.47",
+            "version": "1.0.50",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
+                "reference": "dab4e7624efa543a943be978008f439c333f2249"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dab4e7624efa543a943be978008f439c333f2249",
+                "reference": "dab4e7624efa543a943be978008f439c333f2249",
                 "shasum": ""
             },
             "require": {
@@ -132,7 +132,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-09-14T15:30:29+00:00"
+            "time": "2019-02-01T08:50:36+00:00"
         },
         {
             "name": "predis/predis",
@@ -232,16 +232,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
                 "shasum": ""
             },
             "require": {
@@ -275,33 +275,33 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2018-11-20T15:27:04+00:00"
         },
         {
             "name": "subapp/annotations",
-            "version": "v1.4.0",
+            "version": "v1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/annotations.git",
-                "reference": "bdd46d06d9bc50d3b5bd3c8efe3052f24875d755"
+                "reference": "6b3a29d2d6d65a0f326d530459f6ef3a88f23974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/annotations/zipball/bdd46d06d9bc50d3b5bd3c8efe3052f24875d755",
-                "reference": "bdd46d06d9bc50d3b5bd3c8efe3052f24875d755",
+                "url": "https://api.github.com/repos/subapp/annotations/zipball/6b3a29d2d6d65a0f326d530459f6ef3a88f23974",
+                "reference": "6b3a29d2d6d65a0f326d530459f6ef3a88f23974",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6",
                 "subapp/cache": "~1.0",
-                "subapp/collection": "~0.2",
-                "subapp/lexer": "~1.0",
-                "subapp/loader": "~1.2"
+                "subapp/collection": "~1.4",
+                "subapp/lexer": "~2.0",
+                "subapp/loader": "~1.5"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Annotations\\": "src"
+                    "Subapp\\Annotations\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -318,7 +318,7 @@
             "keywords": [
                 "annotations"
             ],
-            "time": "2018-10-08T11:55:28+00:00"
+            "time": "2019-03-07T09:28:36+00:00"
         },
         {
             "name": "subapp/cache",
@@ -368,22 +368,22 @@
         },
         {
             "name": "subapp/collection",
-            "version": "v0.2.0",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/collection.git",
-                "reference": "1d74938500633dc904f87a567f5fefd1c4c429a5"
+                "reference": "a4d2a33d0304dfcfa8934460dca34884a351a99f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/collection/zipball/1d74938500633dc904f87a567f5fefd1c4c429a5",
-                "reference": "1d74938500633dc904f87a567f5fefd1c4c429a5",
+                "url": "https://api.github.com/repos/subapp/collection/zipball/a4d2a33d0304dfcfa8934460dca34884a351a99f",
+                "reference": "a4d2a33d0304dfcfa8934460dca34884a351a99f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6",
-                "symfony/yaml": "~3.2"
+                "symfony/yaml": "4.2.0-BETA2"
             },
             "type": "library",
             "autoload": {
@@ -406,20 +406,20 @@
                 "collection",
                 "php collection"
             ],
-            "time": "2018-09-23T15:05:47+00:00"
+            "time": "2019-03-08T10:36:40+00:00"
         },
         {
             "name": "subapp/lexer",
-            "version": "v1.3.0",
+            "version": "v2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/lexer.git",
-                "reference": "4b451ab347317b1c866290f9ecf06948e4276a8c"
+                "reference": "2e1edc75b742ea44f604272e4f378cc7469e923b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/lexer/zipball/4b451ab347317b1c866290f9ecf06948e4276a8c",
-                "reference": "4b451ab347317b1c866290f9ecf06948e4276a8c",
+                "url": "https://api.github.com/repos/subapp/lexer/zipball/2e1edc75b742ea44f604272e4f378cc7469e923b",
+                "reference": "2e1edc75b742ea44f604272e4f378cc7469e923b",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Lexer\\": "src"
+                    "Subapp\\Lexer\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -445,20 +445,20 @@
             "keywords": [
                 "lexer"
             ],
-            "time": "2017-05-23T09:23:15+00:00"
+            "time": "2018-12-06T18:44:50+00:00"
         },
         {
             "name": "subapp/loader",
-            "version": "v1.3.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/loader.git",
-                "reference": "ca98e392df324de0bba74bee6b749e70bf564160"
+                "reference": "0004b6976d476b5113bfec8ffb92af3a01008668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/loader/zipball/ca98e392df324de0bba74bee6b749e70bf564160",
-                "reference": "ca98e392df324de0bba74bee6b749e70bf564160",
+                "url": "https://api.github.com/repos/subapp/loader/zipball/0004b6976d476b5113bfec8ffb92af3a01008668",
+                "reference": "0004b6976d476b5113bfec8ffb92af3a01008668",
                 "shasum": ""
             },
             "require": {
@@ -467,7 +467,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Colibri\\Loader\\": "src/"
+                    "Subapp\\Loader\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -487,20 +487,66 @@
                 "php autoloader",
                 "php loader"
             ],
-            "time": "2017-05-23T08:54:19+00:00"
+            "time": "2018-10-08T12:07:40+00:00"
         },
         {
-            "name": "symfony/console",
-            "version": "v3.4.17",
+            "name": "subapp/sql",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/console.git",
-                "reference": "3b2b415d4c48fbefca7dc742aa0a0171bfae4e0b"
+                "url": "https://github.com/subapp/sql.git",
+                "reference": "5b775d2723dc1c6b7c3f49b837afc54b6396c8ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/3b2b415d4c48fbefca7dc742aa0a0171bfae4e0b",
-                "reference": "3b2b415d4c48fbefca7dc742aa0a0171bfae4e0b",
+                "url": "https://api.github.com/repos/subapp/sql/zipball/5b775d2723dc1c6b7c3f49b837afc54b6396c8ea",
+                "reference": "5b775d2723dc1c6b7c3f49b837afc54b6396c8ea",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.2",
+                "subapp/cache": "~1.0",
+                "subapp/collection": "~1.4",
+                "subapp/lexer": "~2.0",
+                "symfony/yaml": "4.2.0-BETA2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Subapp\\Sql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Hontarenko",
+                    "email": "ihontarenko@gmail.com"
+                }
+            ],
+            "description": "SQL Two Way Parser/Builder",
+            "keywords": [
+                "SQL Builder",
+                "sql",
+                "sql query"
+            ],
+            "time": "2019-03-10T13:18:43+00:00"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v3.4.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "71ce77f37af0c5ffb9590e43cc4f70e426945c5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/71ce77f37af0c5ffb9590e43cc4f70e426945c5e",
+                "reference": "71ce77f37af0c5ffb9590e43cc4f70e426945c5e",
                 "shasum": ""
             },
             "require": {
@@ -512,6 +558,9 @@
                 "symfony/dependency-injection": "<3.4",
                 "symfony/process": "<3.3"
             },
+            "provide": {
+                "psr/log-implementation": "1.0"
+            },
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~3.3|~4.0",
@@ -521,7 +570,7 @@
                 "symfony/process": "~3.3|~4.0"
             },
             "suggest": {
-                "psr/log-implementation": "For using the console logger",
+                "psr/log": "For using the console logger",
                 "symfony/event-dispatcher": "",
                 "symfony/lock": "",
                 "symfony/process": ""
@@ -556,20 +605,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2019-02-23T15:06:07+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v4.1.6",
+            "version": "v4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "e3f76ce6198f81994e019bb2b4e533e9de1b9b90"
+                "reference": "de73f48977b8eaf7ce22814d66e43a1662cc864f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/e3f76ce6198f81994e019bb2b4e533e9de1b9b90",
-                "reference": "e3f76ce6198f81994e019bb2b4e533e9de1b9b90",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/de73f48977b8eaf7ce22814d66e43a1662cc864f",
+                "reference": "de73f48977b8eaf7ce22814d66e43a1662cc864f",
                 "shasum": ""
             },
             "require": {
@@ -585,7 +634,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -612,11 +661,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:36:10+00:00"
+            "time": "2019-03-03T18:11:24+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -659,7 +708,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -674,16 +723,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8"
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d0cd638f4634c16d8df4508e847f14e9e43168b8",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/c79c051f5b3a46be09205c73b80b346e4153e494",
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494",
                 "shasum": ""
             },
             "require": {
@@ -729,24 +778,24 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-08-06T14:22:27+00:00"
+            "time": "2018-09-21T13:07:52+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.17",
+            "version": "v4.2.0-BETA2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f"
+                "reference": "c41175c801e3edfda90f32e292619d10c27103d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/640b6c27fed4066d64b64d5903a86043f4a4de7f",
-                "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c41175c801e3edfda90f32e292619d10c27103d7",
+                "reference": "c41175c801e3edfda90f32e292619d10c27103d7",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "conflict": {
@@ -761,7 +810,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -788,13 +837,15 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:33:53+00:00"
+            "time": "2018-11-11T19:52:12+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "subapp/sql": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

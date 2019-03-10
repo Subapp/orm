@@ -99,7 +99,7 @@ class Metadata implements MetadataInterface
      */
     public function getSelectColumns()
     {
-        return $this->metadata[Metadata::RAW_NAMES];
+        return array_values($this->metadata[Metadata::RAW_NAMES]);
     }
     
     /**

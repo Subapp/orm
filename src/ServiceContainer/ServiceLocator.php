@@ -81,7 +81,7 @@ final class ServiceLocator implements ServiceLocatorInterface, LoggerAwareInterf
         if (!$this->instances->has('metadataManager')) {
             $configuration = $this->getConfiguration();
             $rootDirectory = dirname($configuration['identity']);
-            $metadata = sprintf('%s/%s/%s', $rootDirectory, $configuration['build']['build_path'], $configuration['build']['metadata_file']);
+            $metadata = sprintf('%s/%s/%s', $rootDirectory, $configuration->getBuildPath(), $configuration->getMetadataFile());
             
             $this->instances->set('metadataManager', new MetadataManager($metadata, $this));
         }
@@ -191,7 +191,7 @@ final class ServiceLocator implements ServiceLocatorInterface, LoggerAwareInterf
     {
         /** @var Configuration $configuration */
         $configuration = $this->get('configuration');
-        $connectionName = null !== $connectionName ?: $configuration['connection_name'];
+        $connectionName = null !== $connectionName ?: $configuration->getConnectionName();
         
         return $this->getConnectionManager()->getConnection($connectionName);
     }

@@ -3,7 +3,7 @@
 namespace Subapp\Orm\Core\Event;
 
 use Subapp\Orm\Core\Domain\RepositoryInterface;
-use Subapp\Orm\Query\Builder\Select as SelectQuery;
+use Subapp\Sql\Query\Query;
 
 /**
  * Class FinderExecutionEvent
@@ -18,20 +18,20 @@ class FinderExecutionEvent extends AbstractEvent
     protected $repository;
     
     /**
-     * @var SelectQuery
+     * @var Query
      */
-    protected $selectQuery;
+    protected $query;
     
     /**
      * FinderExecutionEvent constructor.
      *
      * @param RepositoryInterface $repository
-     * @param SelectQuery         $selectQuery
+     * @param Query         $query
      */
-    public function __construct(RepositoryInterface $repository, SelectQuery $selectQuery)
+    public function __construct(RepositoryInterface $repository, Query $query)
     {
         $this->repository = $repository;
-        $this->selectQuery = $selectQuery;
+        $this->query = $query;
     }
     
     /**
@@ -43,11 +43,11 @@ class FinderExecutionEvent extends AbstractEvent
     }
     
     /**
-     * @return SelectQuery
+     * @return Query
      */
-    public function getSelectQuery()
+    public function getQuery()
     {
-        return $this->selectQuery;
+        return $this->query;
     }
     
 }
