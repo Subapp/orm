@@ -16,7 +16,7 @@ class SystemIdsPlaceholder extends AbstractPlaceholder
      */
     public function complement(Collection $record)
     {
-        $record->batch([
+        $record->asBatch([
             'pid' => getmypid(),
             'uid' => getmyuid(),
             'gid' => getmygid(),
