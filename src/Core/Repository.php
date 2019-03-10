@@ -239,17 +239,16 @@ abstract class Repository implements RepositoryInterface
      */
     public function executeQueryStmt()
     {
-        $selectQuery = $this->getQuery();
+        $query = $this->getQuery();
         
-        $this->dispatchEvent(ORMEvents::beforeFindExecute, new FinderExecutionEvent($this, $selectQuery));
+        $this->dispatchEvent(ORMEvents::beforeFindExecute, new FinderExecutionEvent($this, $query));
 
-        var_dump($this->getQuery()->getSql());
         $statement = $this->getConnection()->prepare($this->getQuery()->getSql(), []);
         
         // executes a prepared statement
         $statement->execute();
         
-        $this->dispatchEvent(ORMEvents::afterFindExecute, new FinderExecutionEvent($this, $selectQuery));
+        $this->dispatchEvent(ORMEvents::afterFindExecute, new FinderExecutionEvent($this, $query));
         
         // reset qb to previous state
         $this->resetSelectQuery();
@@ -344,8 +343,9 @@ abstract class Repository implements RepositoryInterface
                         $identifier = $metadata->getRawSQLName($metadata->getIdentifier());
                     }
                     
-                    $builder = $query->builder();
-                    $where = $builder->eq($identifier, $criteria);
+                    $builder    = $query->builder();
+                    $where      = $builder->eq($identifier, $criteria);
+                    
                     $query->where($where);
                     
                     break;
@@ -462,26 +462,24 @@ abstract class Repository implements RepositoryInterface
             
             $this->dispatchEvent(ORMEvents::beforePersist, new EntityLifecycleEvent($this, $entity));
             
-            $connection = $this->getConnection();
-            $metadata = $this->getEntityMetadata();
-            $isEntityNew = $this->isNewEntity($entity);
-            $entityData = $this->getEntityDataArray($entity);
+            $connection     = $this->getConnection();
+            $metadata       = $this->getEntityMetadata();
+            $isEntityNew    = $this->isNewEntity($entity);
+            $entityData     = $this->getEntityDataArray($entity);
+            $query          = $this->getPersisterForEntity($entity);
+            $builder        = $query->builder();
             
-            $persister = $this->getPersisterForEntity($entity);
-            $persister->sets($entityData);
-            
-            $builder = $persister->builder();
+            $query->sets($entityData);
             
             $propertyIdentifier = $metadata->getName($metadata->getIdentifier(), Metadata::CAMILIZED);
             
             if (!$isEntityNew && $reflection->hasProperty($propertyIdentifier)) {
                 $where = $builder->eq($metadata->getIdentifier(), $entity->getByProperty($propertyIdentifier));
-                $persister->where($where);
+                $query->where($where);
             }
             
             $connection->start();
-            var_dump($persister->getSql());
-            $connection->execute($persister->getSql());
+            $connection->execute($query->getSql());
             
             if ($reflection->hasProperty($propertyIdentifier) && $isEntityNew) {
                 $reflection->getProperty($propertyIdentifier)->setValue($entity, $connection->lastInsertId());
@@ -606,23 +604,20 @@ abstract class Repository implements RepositoryInterface
             $this->dispatchEvent(ORMEvents::beforeRemove, new EntityLifecycleEvent($this, $entity));
             
             // needed variables
-            $metadata = $this->getEntityMetadata();
-            $remover = $this->createRemover();
-            $identifier = $this->getEntityIdentifier();
-            $connection = $this->getConnection();
+            $metadata           = $this->getEntityMetadata();
+            $query              = $this->createRemover();
+            $builder            = $query->builder();
+            $identifier         = $this->getEntityIdentifier();
+            $connection         = $this->getConnection();
             $propertyIdentifier = $metadata->getName($identifier, Metadata::CAMILIZED);
-            
-            $builder = $remover->builder();
-            
-            $where = $builder->eq($identifier, $entity->getByProperty($propertyIdentifier));
+            $where              = $builder->eq($identifier, $entity->getByProperty($propertyIdentifier));
             
             // refinement of the request
-            $remover->where($where)->limit(1);
+            $query->where($where)->limit(1);
             
             // open transaction and try to execute sql
-            $connection->transaction(function () use ($connection, $remover) {
-                var_dump($remover->getSql());
-                $connection->execute($remover->getSql());
+            $connection->transaction(function () use ($connection, $query) {
+                $connection->execute($query->getSql());
             });
             
             // reset identifier for removed entity

@@ -495,12 +495,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subapp/sql.git",
-                "reference": "5b775d2723dc1c6b7c3f49b837afc54b6396c8ea"
+                "reference": "2da61a040ab87f40865677d8a2d62fb1005f2b77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subapp/sql/zipball/5b775d2723dc1c6b7c3f49b837afc54b6396c8ea",
-                "reference": "5b775d2723dc1c6b7c3f49b837afc54b6396c8ea",
+                "url": "https://api.github.com/repos/subapp/sql/zipball/2da61a040ab87f40865677d8a2d62fb1005f2b77",
+                "reference": "2da61a040ab87f40865677d8a2d62fb1005f2b77",
                 "shasum": ""
             },
             "require": {
@@ -533,7 +533,7 @@
                 "sql",
                 "sql query"
             ],
-            "time": "2019-03-10T13:18:43+00:00"
+            "time": "2019-03-10T13:53:30+00:00"
         },
         {
             "name": "symfony/console",

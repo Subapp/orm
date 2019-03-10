@@ -10,7 +10,7 @@ $configuration = Configuration::createFromFile(__DIR__ . '/config/Orm.php');
 
 $repository = new \IdPorn\Dbl\StarRepository();
 
-$star = $repository->findOneById(1);
+$star = $repository->findOneById(2);
 
 $star->setName("MissAlice18!");
 
