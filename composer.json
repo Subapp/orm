@@ -21,7 +21,7 @@
     "subapp/sql": "dev-master",
     "subapp/collection": "~1.4",
     "subapp/cache": "~1.0",
-    "subapp/annotations": "~1.5",
+    "subapp/annotations": "~1.6",
     "symfony/yaml": "4.2.0-BETA2",
     "symfony/console": "~2.3||~3.0",
     "behat/transliterator": "~1.1",

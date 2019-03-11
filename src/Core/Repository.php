@@ -540,7 +540,7 @@ abstract class Repository implements RepositoryInterface
         
         foreach ($this->getHydrator()->extract($entity) as $sqlName => $value) {
             if ($sqlName !== $metadata->getIdentifier() && null !== $value) {
-                $array[$metadata->getRawSQLName($metadata->getName($sqlName))] = $value;
+                $array[$metadata->getRawSQLName($metadata->getName($sqlName))] = $this->connection->quoteIdentifier($value);
             }
         }
         
