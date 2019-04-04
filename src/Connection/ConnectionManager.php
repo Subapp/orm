@@ -59,11 +59,29 @@ class ConnectionManager implements ConnectionManagerInterface
             ]);
         }
         
+        $this->connect($name);
+        
+        return static::$connections[$name];
+    }
+
+    /**
+     * @param string $name
+     */
+    public function connect($name)
+    {
         if (!static::$connections->has($name)) {
             static::$connections->set($name, new Connection($this->connectionSettings->get($name)));
         }
-        
-        return static::$connections[$name];
+    }
+
+    /**
+     * @param string $name
+     */
+    public function disconnect($name)
+    {
+        if (static::$connections->has($name)) {
+            unset(static::$connections[$name]);
+        }
     }
     
 }
