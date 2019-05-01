@@ -539,8 +539,14 @@ abstract class Repository implements RepositoryInterface
         $array = [];
         
         foreach ($this->getHydrator()->extract($entity) as $sqlName => $value) {
-            if ($sqlName !== $metadata->getIdentifier() && null !== $value) {
-                $array[$metadata->getRawSQLName($metadata->getName($sqlName))] = addcslashes($value, '"\'');
+            if ($sqlName !== $metadata->getIdentifier()) {
+                $key = $metadata->getRawSQLName($metadata->getName($sqlName));
+                
+                if (null !== $value) {
+                    $array[$key] = addcslashes($value, '"\'');
+                } else if (null === $value && $metadata->isNullable($sqlName)) {
+                    $array[$key] = null;
+                }
             }
         }
         
